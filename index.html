@@ -1,99 +1,11 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <title>Pamuk Hasat Sensörü</title>
-  <style>
-    body { 
-      background: url('https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center/cover;
-      background-color: #0a1a1a;
-      background-blend-mode: overlay;
-      color: #fff; 
-      font-family: sans-serif; 
-      text-align: center; 
-      margin: 0; 
-      padding: 50px;
-    }
-    .veri { 
-      font-size: 24px; 
-      margin: 20px 0; 
-      background: rgba(0,0,0,0.5);
-      padding: 10px;
-      border-radius: 10px;
-      display: inline-block;
-    }
-    .uyari { 
-      color: #ff5e5e; 
-      font-size: 32px; 
-      font-weight: bold; 
-      margin: 30px 0; 
-    }
-    .iller {
-      margin-top: 40px;
-      font-size: 20px;
-    }
-    .iller ul {
-      list-style: none;
-      padding: 0;
-    }
-    .iller li {
-      margin: 10px 0;
-    }
-    button { 
-      background: #2b5e7a; 
-      color: white; 
-      border: none; 
-      padding: 15px 30px; 
-      font-size: 18px; 
-      border-radius: 8px; 
-      cursor: pointer; 
-      margin-top: 20px;
-    }
-    footer {
-      margin-top: 60px;
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>Pamuk Hasat Sensörü</h1>
-  
-  <div class="veri">Şanlıurfa Anlık: Yükleniyor...</div>
-  <div class="veri">Genel: Sıcaklık: 28°C | Nem: %42 | Rüzgar: 12 km/saat</div>
-
-  <div class="uyari">HASAT UYARISI</div>
-  <p>Pamuk çiçeği açtı. Üç gün içinde topla. Yoksa kalite düşer.</p>
-  <p>🌸➡️⏳</p>
-
-  <button>Tamam, bildirdim</button>
-
-  <div class="iller">
-    <h2>Pamuk Yetişen Başlıca İller</h2>
-    <ul>
-      <li>🇹🇷 Şanlıurfa – %41 üretim</li>
-      <li>🇹🇷 Diyarbakır – %17</li>
-      <li>🇹🇷 Aydın – %11</li>
-      <li>🇹🇷 Hatay & Adana – %8</li>
-    </ul>
-  </div>
-
-  <footer>
-    <small>Teknofest 2026 – Eymen Talha & Takım</small>
-  </footer>
-
-  <script>
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=Sanliurfa&appid=7666ec7582302047079bb43e3590e09e&units=metric&lang=tr')
-      .then(r => r.json())
-      .then(d => {
-        document.querySelector('.veri').innerHTML = 
-          `Şanlıurfa Anlık: ${d.main.temp}°C | Nem ${d.main.humidity}% | Rüzgar ${d.wind.speed} km/s`;
-      })
-      .catch(e => {
-        console.log("Hata:", e);
-        document.querySelector('.veri').innerHTML = "Veri alınamadı, internetin var mı?";
-      });
-  </script>
-
-</body>
-</html>
+<script>
+  fetch('https://api.openweathermap.org/data/2.5/weather?q=Sanliurfa,TR&appid=123dc6f0ebf28ca448f9043ed8f26f5b&units=metric&lang=tr')
+    .then(r => r.json())
+    .then(d => {
+      document.querySelector('.veri').innerHTML = 
+        `Şanlıurfa Anlık: ${d.main.temp}°C | Nem ${d.main.humidity}% | Rüzgar ${d.wind.speed} km/s`;
+    })
+    .catch(e => {
+      document.querySelector('.veri').innerHTML = "Yüklenemedi... API biraz tembel bugün.";
+    });
+</script>
