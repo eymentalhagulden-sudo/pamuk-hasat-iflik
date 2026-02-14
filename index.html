@@ -84,3 +84,11 @@
 
 </body>
 </html>
+<script>
+  fetch('https://api.openweathermap.org/data/2.5/weather?q=Sanliurfa&appid=7666ec7582302047079bb43e3590e09e&units=metric&lang=tr')
+    .then(r => r.json())
+    .then(d => {
+      document.querySelector('.veri').innerHTML = 
+        `Şanlıurfa Anlık: ${d.main.temp}°C | Nem ${d.main.humidity}% | Rüzgar ${d.wind.speed} km/s`;
+    });
+</script>
