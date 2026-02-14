@@ -5,7 +5,7 @@
   <title>Pamuk Hasat Sensörü</title>
   <style>
     body { 
-      background: url('https://tarfinprod-public.s3.eu-central-1.amazonaws.com/uploads/2021/2/cumkm63aDnK4JM9JKb2z4WXvjVb7LERhNLpZ.jpg') no-repeat center/cover;
+      background: url('https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center/cover;
       background-color: #0a1a1a;
       background-blend-mode: overlay;
       color: #fff; 
@@ -59,7 +59,7 @@
 
   <h1>Pamuk Hasat Sensörü</h1>
   
-  <div class="veri">Şanlıurfa Anlık: 13.5°C | Nem %71 | Rüzgar 10 km/s</div>
+  <div class="veri">Şanlıurfa Anlık: Yükleniyor...</div>
   <div class="veri">Genel: Sıcaklık: 28°C | Nem: %42 | Rüzgar: 12 km/saat</div>
 
   <div class="uyari">HASAT UYARISI</div>
@@ -82,13 +82,18 @@
     <small>Teknofest 2026 – Eymen Talha & Takım</small>
   </footer>
 
+  <script>
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=Sanliurfa&appid=7666ec7582302047079bb43e3590e09e&units=metric&lang=tr')
+      .then(r => r.json())
+      .then(d => {
+        document.querySelector('.veri').innerHTML = 
+          `Şanlıurfa Anlık: ${d.main.temp}°C | Nem ${d.main.humidity}% | Rüzgar ${d.wind.speed} km/s`;
+      })
+      .catch(e => {
+        console.log("Hata:", e);
+        document.querySelector('.veri').innerHTML = "Veri alınamadı, internetin var mı?";
+      });
+  </script>
+
 </body>
 </html>
-<script>
-  fetch('https://api.openweathermap.org/data/2.5/weather?q=Sanliurfa&appid=7666ec7582302047079bb43e3590e09e&units=metric&lang=tr')
-    .then(r => r.json())
-    .then(d => {
-      document.querySelector('.veri').innerHTML = 
-        `Şanlıurfa Anlık: ${d.main.temp}°C | Nem ${d.main.humidity}% | Rüzgar ${d.wind.speed} km/s`;
-    });
-</script>
